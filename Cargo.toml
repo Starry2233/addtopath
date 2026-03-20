@@ -1,0 +1,12 @@
+[package]
+name = "addtopath"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+clap = { version = "4.0", features = ["derive"] }
+dunce = "1.0"
+
+[target.'cfg(windows)'.dependencies]
+winreg = "0.56"
+winapi = { version = "0.3", features = ["winuser"] }
