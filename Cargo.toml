@@ -1,11 +1,30 @@
 [package]
-name = "addtopath"
+name = "starryenv"
 version = "0.1.0"
 edition = "2024"
+
+[[bin]]
+name = "putenv"
+path = "src/putenv.rs"
+
+[[bin]]
+name = "catenv"
+path = "src/catenv.rs"
+
+[[bin]]
+name = "addtopath"
+path = "src/addtopath.rs"
+
+[lib]
+name = "starryenv"
+crate-type = ["cdylib"]
+path = "src/py_wrapper.rs"
 
 [dependencies]
 clap = { version = "4.0", features = ["derive"] }
 dunce = "1.0"
+pyo3 = { version = "0.20.0", features = ["extension-module"] }
+anyhow = "1.0"
 
 [target.'cfg(windows)'.dependencies]
 winreg = "0.56"
