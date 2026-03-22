@@ -55,12 +55,19 @@ pub fn get_user_env(
     default: Option<PyObject>,
     py: Python,
 ) -> PyResult<PyObject> {
-    match utils::get_user_env(key) {
-        Ok(val) => Ok(PyString::new(py, &val).into()),
-        Err(_) => match default {
-            Some(obj) => Ok(obj),
-            None => Ok(py.None()),
-        },
+    #[cfg(windows)]
+    {
+        match utils::get_user_env(key) {
+            Ok(val) => Ok(PyString::new(py, &val).into()),
+            Err(_) => match default {
+                Some(obj) => Ok(obj),
+                None => Ok(py.None()),
+            },
+        }
+    }
+    #[cfg(not(windows))]
+    {
+        get_system_env(key, default, py)
     }
 }
 

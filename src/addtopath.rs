@@ -13,7 +13,7 @@ pub struct Cli {
         short = 's',
         long = "scope",
         value_enum,
-        default_value_t = Scope::Process
+        default_value_t = Scope::User
     )]
     scope: Scope,
 }
@@ -44,7 +44,7 @@ pub fn set_to_user(directory: String) -> bool {
 
     #[cfg(windows)]
     { notify_system(); }
-    
+
     res
 }
 
